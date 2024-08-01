@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Twitter clone ",
   "main": "index.js",
-  "type":"module",
+  "type":" ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon index.js"
+    "start": "npx nodemon src/index.js"
   },
   "author": "Aakash Singh",
   "license": "MIT",

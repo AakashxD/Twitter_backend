@@ -1,25 +1,21 @@
-# requirements
-// user should be able to post a tweet
- - - content (250 char max)
- - - image upload 
- - - liked (count )
- - - comments tweets
- - - hashtags(#)
- - bio 
-#  (user authentications)
-- - username
-- - followers
-- - authentications'
-- - email n password
+# Requirement
+- User should be able to create a post
+ - [the post cant be more than 250 chars]
+- [ every post /tweet will be having support for image upload ]
 
-# (hashtag)
-  - - word
-  - - list of tweet 
-  - 
-# like comment reTweet
+- any post should be visible to all those users who fillow the author 
+- anyone who follow you can a comment on aa post/tweet
+- anyone who follow you can like on  POST
+- WE CAN LIKE AND COMMENT
+- reTweet
+# User Profile
+  - NAME
+  -FOLLOWER COunt
+  - bio
+  -Last 10 tweet
 
-# other users should be able to tweet to tweet
 
-# user should go to profile n follow 
+# pagination on tweet
+# user auth
 
-# search by hashtags 
+# every TWeet might be having a hastag
