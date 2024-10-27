@@ -1,6 +1,12 @@
 const mongoose=require('mongoose')
+const dotenv=require('dotenv').config()
+const MONGO_URI=process.env.MONGO_URI
 const connect = async ()=>{
-   await  mongoose.connect('mongodb+srv://axkashsingh:aakashsingh@cluster0.vo9xhvj.mongodb.net/Twitterbackend');
+  try {
+    await  mongoose.connect(MONGO_URI);
+  } catch (error) {
+    console.log(error);
+  }
  }
 
  module.exports=connect

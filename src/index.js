@@ -5,7 +5,7 @@ const app = express();
 app.listen(3000, async () => {
   connect();
   console.log("mongoDB connected");
-  console.log("server started at port no. 3000");
+  console.log("server started at port");
   // mongo DB connection established
   
 
