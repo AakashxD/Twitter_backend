@@ -8,5 +8,4 @@ const connect = async ()=>{
     console.log(error);
   }
  }
-
  module.exports=connect

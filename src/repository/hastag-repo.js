@@ -4,24 +4,26 @@ class HashtagRepository {
     async create(data) {
         try {
             const tag = await Hashtag.create(data);
-            return tag; // Corrected here
+            return tag;
         } catch (error) {
             console.error(error);
             return null; // Return null or a suitable value in case of an error
         }
     }
-    async bulkCreate(data){
+
+    async bulkCreate(data) {
         try {
-            const tag=await Hashtag.insertMany(data)
+            const tags = await Hashtag.insertMany(data);
+            return tags;
         } catch (error) {
             console.error(error);
-            return null;
+            return null; // Return null or a suitable value in case of an error
         }
     }
 
     async get(id) {
         try {
-            const tag = await Hashtag.findById(id); // Renamed to 'hashtag'
+            const hashtag = await Hashtag.findById(id);
             return hashtag;
         } catch (error) {
             console.error(error);
@@ -29,27 +31,27 @@ class HashtagRepository {
         }
     }
 
-    
-    async destory(id) {
+    async destroy(id) {
         try {
-            const tag = await Hashtag.findByIdAndDelete(id); // Renamed to 'hashtag'
+            const tag = await Hashtag.findByIdAndDelete(id);
             return tag; // Return the deleted Hashtag or a suitable value
         } catch (error) {
             console.error(error);
             return null; // Return null or a suitable value in case of an error
         }
     }
-    async findByName(titleList){
+
+    async findByName(titleList) {
         try {
-            const tags=await Hashtag.find({
-                title:titleList
+            const tags = await Hashtag.find({
+                title:  titleList 
             });
             return tags;
         } catch (error) {
-            console.log(error);
+            console.error(error);
+            return null; // Return null or a suitable value in case of an error
         }
     }
-
 }
 
 module.exports = HashtagRepository;

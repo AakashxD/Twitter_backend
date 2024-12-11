@@ -1,4 +1,4 @@
-const HashtagRepository = require('../repository/hastag-repo');
+const { HashtagRepository }= require('../repository/index');
 const { TweetRepository }=require('../repository/index');
 class TweetServices{
 
@@ -8,25 +8,47 @@ class TweetServices{
 
     }
 
-   async create(data){
-        const content=data.content;
-        const tags=content.match(/#[a-zA-Z0-9_]+/g);
-        tags=tags.map((e)=>e.substring(1));
-       console.log(tags);
-        const tweet=await this.tweetRepository.create(data);
-        const alreadyPresenttags=this.hashtagRepository.findByName(tags).map(tags=>);
-       /**
-        *  [exited,coding,js ]-> [{title:execited}]
-
-   *  1 bulkCreate in mongoose
-   *  2 filter title if hashtag based in multiple tags 
-   * 3 how to ad tweet id inside all the hashatags
-  
-   */
+    async create(data) {
+        const content = data.content;
+        let tags = content.match(/#[a-zA-Z0-9_]+/g) || []; // Default to empty array if no matches
+        tags = tags.map((e) => e.substring(1)); // Remove the '#' symbol
+    
+        const tweet = await this.tweetRepository.create(data);
+    
+        // Find hashtags already present in the repository
+        let alreadyPresentTags = await this.hashtagRepository.findByName(tags);
+    
+        // Extract titles for comparison
+        const alreadyPresentTagTitles = alreadyPresentTags.map((tag) => tag.title);
+    
+        // Filter out new tags (not present in the repository)
+        let newTags = tags.filter(tag => !alreadyPresentTagTitles.includes(tag));
+        newTags = newTags.map(tag => ({
+            title: tag,
+            tweets: [tweet.id]
+        }));
+    
+        // Create new tags in the repository
+       await this.hashtagRepository.bulkCreate(newTags);
+    
+        // Update tweets in already existing tags
+        for (const tag of alreadyPresentTags) {
+            if (!Array.isArray(tag.tweets)) {
+                tag.tweets = []; // Initialize if undefined
+            }
+            tag.tweets.push(tweet.id); // Add the tweet ID to the tag's tweets
+            await tag.save(); // Save the updated tag
+        }
+    
         return tweet;
+         
+        
     }
+    
+    
+    
+    
 }
-// thiss is my #first #tweet ,I am really #execited (/#[a-z0-9_]+/g)
+
 
 module.exports=TweetServices;
-
