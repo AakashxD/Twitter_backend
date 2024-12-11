@@ -54,4 +54,4 @@ class HashtagRepository {
     }
 }
 
-module.exports = HashtagRepository;
+export default  HashtagRepository;

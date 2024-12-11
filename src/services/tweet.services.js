@@ -1,5 +1,5 @@
-import { HashtagRepository } from '../repository/index.js';
-import { TweetRepository } from '../repository/index.js';
+import  HashtagRepository  from '../repository/index.js';
+import  TweetRepository  from '../repository/index.js';
 
 class TweetServices{
 
